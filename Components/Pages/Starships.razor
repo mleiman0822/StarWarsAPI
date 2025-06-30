@@ -1,0 +1,101 @@
+﻿@page "/starships"
+@using StarWarsAPI.Data.Models
+@using StarWarsAPI.Data.Services
+@inject StarshipService StarshipService
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<MudPaper Class="pa-2">
+    <MudButton OnClick="OpenAddDialog" Color="Color.Primary" Class="mb-4">Add New Starship</MudButton>
+
+    <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 8px;">
+        <MudTable Items="_starships" Hover="true" Striped="true" Dense="true">
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Model</MudTh>
+                <MudTh>Manufacturer</MudTh>
+                <MudTh>Cost</MudTh>
+                <MudTh>Length</MudTh>
+                <MudTh>Speed</MudTh>
+                <MudTh>Crew</MudTh>
+                <MudTh>Passengers</MudTh>
+                <MudTh>Cargo</MudTh>
+                <MudTh>Hyperdrive</MudTh>
+                <MudTh>Class</MudTh>
+                <MudTh>Actions</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>@context.Name</MudTd>
+                <MudTd>@context.Model</MudTd>
+                <MudTd>@context.Manufacturer</MudTd>
+                <MudTd>@context.CostInCredits</MudTd>
+                <MudTd>@context.Length</MudTd>
+                <MudTd>@context.MaxAtmospheringSpeed</MudTd>
+                <MudTd>@context.Crew</MudTd>
+                <MudTd>@context.Passengers</MudTd>
+                <MudTd>@context.CargoCapacity</MudTd>
+                <MudTd>@context.HyperdriveRating</MudTd>
+                <MudTd>@context.StarshipClass</MudTd>
+                <MudTd>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="() => OpenEditDialog(context)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => DeleteStarship(context)" />
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </div>
+</MudPaper>
+
+@code {
+    private List<Starship> _starships = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadStarshipsAsync();
+    }
+
+    private async Task LoadStarshipsAsync()
+    {
+        _starships = await StarshipService.GetAllAsync();
+    }
+
+    private async Task OpenAddDialog()
+    {
+        var parameters = new DialogParameters { ["Starship"] = new Starship() };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true };
+
+        var dialog = DialogService.Show<StarshipDialog>("Add New Starship", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            var newStarship = (Starship)result.Data!;
+            await StarshipService.AddAsync(newStarship);
+            Snackbar.Add("Starship added", Severity.Success);
+            await LoadStarshipsAsync();
+        }
+    }
+
+    private async Task OpenEditDialog(Starship starship)
+    {
+        var parameters = new DialogParameters { ["Starship"] = starship };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true };
+
+        var dialog = DialogService.Show<StarshipDialog>("Edit Starship", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            var updatedStarship = (Starship)result.Data!;
+            await StarshipService.UpdateAsync(updatedStarship);
+            Snackbar.Add("Starship updated", Severity.Success);
+            await LoadStarshipsAsync();
+        }
+    }
+
+    private async Task DeleteStarship(Starship starship)
+    {
+        await StarshipService.DeleteAsync(starship.Id);
+        Snackbar.Add($"Deleted Starship: {starship.Name}", Severity.Error);
+        await LoadStarshipsAsync();
+    }
+}

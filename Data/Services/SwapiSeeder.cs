@@ -10,14 +10,14 @@ namespace StarWarsAPI.Data.Services
         public SwapiSeeder(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _starshipService = new StarshipService();
+            _starshipService = new StarshipService(dbContext);
         }
 
         public async Task SeedAsync()
         {
             if (_dbContext.Starships.Any()) return;
 
-            var starships = await _starshipService.GetAllStarshipsAsync();
+            var starships = await _starshipService.QueryStarshipsFromSwapi();
 
             foreach (var ship in starships)
             {

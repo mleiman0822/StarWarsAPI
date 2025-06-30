@@ -1,0 +1,58 @@
+﻿@using StarWarsAPI.Data.Models
+@inject IDialogService DialogService
+
+<MudDialog>
+    <TitleContent>
+        @(_starship.Id == 0 ? "Add New Starship" : "Edit Starship")
+    </TitleContent>
+
+    <DialogContent>
+        <MudTextField Label="Name" @bind-Value="_starship.Name" Immediate="true" />
+        <MudTextField Label="Model" @bind-Value="_starship.Model" Immediate="true" />
+        <MudTextField Label="Manufacturer" @bind-Value="_starship.Manufacturer" Immediate="true" />
+        <MudTextField Label="Cost In Credits" @bind-Value="_starship.CostInCredits" Immediate="true" />
+        <MudTextField Label="Length" @bind-Value="_starship.Length" Immediate="true" />
+        <MudTextField Label="Max Speed" @bind-Value="_starship.MaxAtmospheringSpeed" Immediate="true" />
+        <MudTextField Label="Crew" @bind-Value="_starship.Crew" Immediate="true" />
+        <MudTextField Label="Passengers" @bind-Value="_starship.Passengers" Immediate="true" />
+        <MudTextField Label="Cargo Capacity" @bind-Value="_starship.CargoCapacity" Immediate="true" />
+        <MudTextField Label="Hyperdrive Rating" @bind-Value="_starship.HyperdriveRating" Immediate="true" />
+        <MudTextField Label="Starship Class" @bind-Value="_starship.StarshipClass" Immediate="true" />
+    </DialogContent>
+
+    <DialogActions>
+        <MudButton OnClick="Cancel" Color="Color.Secondary">Cancel</MudButton>
+        <MudButton OnClick="Save" Color="Color.Primary">Save</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = default!;
+
+    [Parameter] public Starship Starship { get; set; } = new();
+
+    private Starship _starship = new();
+
+    protected override void OnInitialized()
+    {
+        _starship = new Starship
+            {
+                Id = Starship.Id,
+                Name = Starship.Name,
+                Model = Starship.Model,
+                Manufacturer = Starship.Manufacturer,
+                CostInCredits = Starship.CostInCredits,
+                Length = Starship.Length,
+                MaxAtmospheringSpeed = Starship.MaxAtmospheringSpeed,
+                Crew = Starship.Crew,
+                Passengers = Starship.Passengers,
+                CargoCapacity = Starship.CargoCapacity,
+                HyperdriveRating = Starship.HyperdriveRating,
+                StarshipClass = Starship.StarshipClass,
+            };
+    }
+
+    private void Save() => MudDialog.Close(DialogResult.Ok(_starship));
+
+    private void Cancel() => MudDialog.Cancel();
+}
