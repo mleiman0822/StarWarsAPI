@@ -13,7 +13,7 @@ COPY . .
 RUN rm -rf obj bin
 
 # Publish the app
-RUN dotnet publish "StarWarsAPI.csproj" -c Release -o /app/publish --no-restore
+RUN dotnet publish "StarWarsAPI.csproj" -c Release -o /app/publish
 
 # Use the runtime image to run the app
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
