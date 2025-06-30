@@ -20,19 +20,47 @@ else{
         <MudButton OnClick="OpenAddDialog" Color="Color.Primary" Class="mb-4">Add New Starship</MudButton>
 
         <div style="max-height: 500px; overflow-y: auto; border: 1px solid #ccc; padding: 8px;">
-            <MudTable Items="_starships" Hover="true" Striped="true" Dense="true">
+            <MudTextField @bind-Value="searchString"
+                          Placeholder="Search starships..."
+                          Adornment="Adornment.Start"
+                          Immediate="true"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          Class="mb-4" />
+            <MudTable Items="_starships" Hover="true" Striped="true" Dense="true" Filter="FilterStarship">
                 <HeaderContent>
-                    <MudTh>Name</MudTh>
-                    <MudTh>Model</MudTh>
-                    <MudTh>Manufacturer</MudTh>
-                    <MudTh>Cost</MudTh>
-                    <MudTh>Length</MudTh>
-                    <MudTh>Speed</MudTh>
-                    <MudTh>Crew</MudTh>
-                    <MudTh>Passengers</MudTh>
-                    <MudTh>Cargo</MudTh>
-                    <MudTh>Hyperdrive</MudTh>
-                    <MudTh>Class</MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Starship, object>(s => s.Name)">Name</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Starship, object>(s => s.Model)">Model</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Starship, object>(s => s.Manufacturer)">Manufacturer</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Starship, object>(s => s.CostInCredits)">Cost</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Starship, object>(s => s.Length)">Length</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Starship, object>(s => s.MaxAtmospheringSpeed)">Speed</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Starship, object>(s => s.Crew)">Crew</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Starship, object>(s => s.Passengers)">Passengers</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Starship, object>(s => s.CargoCapacity)">Cargo</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Starship, object>(s => s.HyperdriveRating)">Hyperdrive</MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortBy="new Func<Starship, object>(s => s.StarshipClass)">Class</MudTableSortLabel>
+                    </MudTh>
                     <MudTh>Actions</MudTh>
                 </HeaderContent>
                 <RowTemplate>
@@ -63,6 +91,7 @@ else{
 @code {
     private List<Starship> _starships = new();
     private bool _isAuthenticated;
+    private string searchString = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -119,5 +148,17 @@ else{
         await StarshipService.DeleteAsync(starship.Id);
         Snackbar.Add($"Deleted Starship: {starship.Name}", Severity.Error);
         await LoadStarshipsAsync();
+    }
+
+    private bool FilterStarship(Starship starship)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+
+        return starship.Name?.Contains(searchString, StringComparison.OrdinalIgnoreCase) == true
+            || starship.Model?.Contains(searchString, StringComparison.OrdinalIgnoreCase) == true
+            || starship.Manufacturer?.Contains(searchString, StringComparison.OrdinalIgnoreCase) == true
+            || starship.StarshipClass?.Contains(searchString, StringComparison.OrdinalIgnoreCase) == true
+            || $"{starship.CostInCredits}".Contains(searchString);
     }
 }
