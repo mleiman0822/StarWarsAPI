@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\matth\\source\\repos\\StarWarsAPI\\StarWarsAPI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\StarWarsAPI.bundle.scp.css",
+      "PackagePath": "staticwebassets\\StarWarsAPI.2uqny22nh3.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\matth\\source\\repos\\StarWarsAPI\\StarWarsAPI\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\matth\\source\\repos\\StarWarsAPI\\StarWarsAPI\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\matth\\source\\repos\\StarWarsAPI\\StarWarsAPI\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\matth\\source\\repos\\StarWarsAPI\\StarWarsAPI\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.StarWarsAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.StarWarsAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.StarWarsAPI.props",
+      "PackagePath": "build\\StarWarsAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.StarWarsAPI.props",
+      "PackagePath": "buildMultiTargeting\\StarWarsAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.StarWarsAPI.props",
+      "PackagePath": "buildTransitive\\StarWarsAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
