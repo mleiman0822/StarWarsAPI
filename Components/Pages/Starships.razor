@@ -4,53 +4,75 @@
 @inject StarshipService StarshipService
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
-<MudPaper Class="pa-2">
-    <MudButton OnClick="OpenAddDialog" Color="Color.Primary" Class="mb-4">Add New Starship</MudButton>
+@if (!_isAuthenticated)
+{
+    <MudStack AlignItems="AlignItems.Center" JustifyContent="center" Spacing="2" Class="mt-6">
+        <MudText Typo="Typo.h6" Color="Color.Warning" Align="Align.Center">
+            You must be logged in to view the starships table.
+        </MudText>
+        <img src="https://i.pinimg.com/originals/4a/6f/40/4a6f40b0c856d07ff7767e35e85f71ac.png" alt="Star Wars" style="max-width:300px; border-radius:12px; box-shadow:0 0 10px rgba(255, 215, 0, 0.6);" />
+    </MudStack>
+}
+else{
+    <MudPaper Class="pa-2">
+        <MudButton OnClick="OpenAddDialog" Color="Color.Primary" Class="mb-4">Add New Starship</MudButton>
 
-    <div style="max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 8px;">
-        <MudTable Items="_starships" Hover="true" Striped="true" Dense="true">
-            <HeaderContent>
-                <MudTh>Name</MudTh>
-                <MudTh>Model</MudTh>
-                <MudTh>Manufacturer</MudTh>
-                <MudTh>Cost</MudTh>
-                <MudTh>Length</MudTh>
-                <MudTh>Speed</MudTh>
-                <MudTh>Crew</MudTh>
-                <MudTh>Passengers</MudTh>
-                <MudTh>Cargo</MudTh>
-                <MudTh>Hyperdrive</MudTh>
-                <MudTh>Class</MudTh>
-                <MudTh>Actions</MudTh>
-            </HeaderContent>
-            <RowTemplate>
-                <MudTd>@context.Name</MudTd>
-                <MudTd>@context.Model</MudTd>
-                <MudTd>@context.Manufacturer</MudTd>
-                <MudTd>@context.CostInCredits</MudTd>
-                <MudTd>@context.Length</MudTd>
-                <MudTd>@context.MaxAtmospheringSpeed</MudTd>
-                <MudTd>@context.Crew</MudTd>
-                <MudTd>@context.Passengers</MudTd>
-                <MudTd>@context.CargoCapacity</MudTd>
-                <MudTd>@context.HyperdriveRating</MudTd>
-                <MudTd>@context.StarshipClass</MudTd>
-                <MudTd>
-                    <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="() => OpenEditDialog(context)" />
-                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => DeleteStarship(context)" />
-                </MudTd>
-            </RowTemplate>
-        </MudTable>
-    </div>
-</MudPaper>
+        <div style="max-height: 500px; overflow-y: auto; border: 1px solid #ccc; padding: 8px;">
+            <MudTable Items="_starships" Hover="true" Striped="true" Dense="true">
+                <HeaderContent>
+                    <MudTh>Name</MudTh>
+                    <MudTh>Model</MudTh>
+                    <MudTh>Manufacturer</MudTh>
+                    <MudTh>Cost</MudTh>
+                    <MudTh>Length</MudTh>
+                    <MudTh>Speed</MudTh>
+                    <MudTh>Crew</MudTh>
+                    <MudTh>Passengers</MudTh>
+                    <MudTh>Cargo</MudTh>
+                    <MudTh>Hyperdrive</MudTh>
+                    <MudTh>Class</MudTh>
+                    <MudTh>Actions</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd>@context.Name</MudTd>
+                    <MudTd>@context.Model</MudTd>
+                    <MudTd>@context.Manufacturer</MudTd>
+                    <MudTd>@context.CostInCredits</MudTd>
+                    <MudTd>@context.Length</MudTd>
+                    <MudTd>@context.MaxAtmospheringSpeed</MudTd>
+                    <MudTd>@context.Crew</MudTd>
+                    <MudTd>@context.Passengers</MudTd>
+                    <MudTd>@context.CargoCapacity</MudTd>
+                    <MudTd>@context.HyperdriveRating</MudTd>
+                    <MudTd>@context.StarshipClass</MudTd>
+                    <MudTd>
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="() => OpenEditDialog(context)" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => DeleteStarship(context)" />
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        </div>
+    </MudPaper>
+    <MudStack AlignItems="AlignItems.Center" JustifyContent="center" Spacing="2" Class="mt-6">
+        <img src="https://www.jedinews.com/wp-content/uploads/2023/09/HeritageAuctions-Xwing-Sep23.jpg" alt="Star Wars" style="max-width:300px; border-radius:12px; box-shadow:0 0 10px rgba(255, 215, 0, 0.6);" />
+    </MudStack>
+}
 
 @code {
     private List<Starship> _starships = new();
+    private bool _isAuthenticated;
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadStarshipsAsync();
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        _isAuthenticated = authState.User.Identity?.IsAuthenticated ?? false;
+
+        if (_isAuthenticated)
+        {
+            await LoadStarshipsAsync();
+        }
     }
 
     private async Task LoadStarshipsAsync()
