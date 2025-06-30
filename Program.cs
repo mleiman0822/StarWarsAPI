@@ -82,8 +82,16 @@ app.MapAdditionalIdentityEndpoints();
 
 using (var scope = app.Services.CreateScope())
 {
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate(); 
+}
+
+
+using (var scope = app.Services.CreateScope())
+{
     var seeder = scope.ServiceProvider.GetRequiredService<SwapiSeeder>();
     await seeder.SeedAsync();
+
 }
 
 app.Run();
