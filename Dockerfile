@@ -1,4 +1,4 @@
-# Use Microsoft's official .NET SDK image to build the app
+# Stage 1: Build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
@@ -9,16 +9,17 @@ RUN dotnet restore "StarWarsAPI.csproj"
 # Copy the rest of the source code
 COPY . .
 
-# Clean intermediate build files to avoid duplicate assembly attributes
-RUN rm -rf obj bin
+# Publish the app in Release mode
+RUN dotnet publish "StarWarsAPI.csproj" -c Release -o /app/publish --no-restore
 
-# Publish the app
-RUN dotnet publish "StarWarsAPI.csproj" -c Release -o /app/publish
-
-# Use the runtime image to run the app
+# Stage 2: Runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
+
+# Copy published app from build stage
 COPY --from=build /app/publish .
+
+# Expose port 80 (default HTTP port)
 EXPOSE 80
 
 # Start the app

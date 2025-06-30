@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "sDjg/W25oJup5eyT6lY+g3i79ZQbNrXwUr83rf4elk8=",
+  "Hash": "CAo82b0ehwnYY1HblampP4Zo5FDOgk9iLkxpsL92wS8=",
   "Source": "StarWarsAPI",
   "BasePath": "_content/StarWarsAPI",
   "Mode": "Default",
@@ -1628,7 +1628,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 30 Jun 2025 20:43:16 GMT"
+          "Value": "Mon, 30 Jun 2025 21:16:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1673,7 +1673,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 30 Jun 2025 20:43:16 GMT"
+          "Value": "Mon, 30 Jun 2025 21:16:06 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1714,7 +1714,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 30 Jun 2025 20:43:16 GMT"
+          "Value": "Mon, 30 Jun 2025 21:16:06 GMT"
         },
         {
           "Name": "Link",
@@ -1755,7 +1755,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 30 Jun 2025 20:43:16 GMT"
+          "Value": "Mon, 30 Jun 2025 21:16:06 GMT"
         },
         {
           "Name": "Link",

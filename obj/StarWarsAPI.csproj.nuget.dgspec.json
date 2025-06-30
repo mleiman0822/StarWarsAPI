@@ -62,7 +62,7 @@
               "target": "Package",
               "version": "[8.0.12, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.EntityFrameworkCore.Design": {
               "target": "Package",
               "version": "[8.0.12, )"
             },
@@ -77,6 +77,10 @@
             "MudBlazor": {
               "target": "Package",
               "version": "[8.8.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.7, )"
             },
             "xunit": {
               "target": "Package",
