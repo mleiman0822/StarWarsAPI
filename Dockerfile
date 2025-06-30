@@ -6,9 +6,14 @@ WORKDIR /src
 COPY ["StarWarsAPI.csproj", "./"]
 RUN dotnet restore "StarWarsAPI.csproj"
 
-# Copy the rest of the source code and build the app
+# Copy the rest of the source code
 COPY . .
-RUN dotnet publish "StarWarsAPI.csproj" -c Release -o /app/publish
+
+# Clean intermediate build files to avoid duplicate assembly attributes
+RUN rm -rf obj bin
+
+# Publish the app
+RUN dotnet publish "StarWarsAPI.csproj" -c Release -o /app/publish --no-restore
 
 # Use the runtime image to run the app
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
