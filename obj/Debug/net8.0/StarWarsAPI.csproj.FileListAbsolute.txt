@@ -158,3 +158,5 @@ C:\Users\matth\source\repos\StarWarsAPI\StarWarsAPI\bin\Debug\net8.0\Microsoft.E
 C:\Users\matth\source\repos\StarWarsAPI\StarWarsAPI\bin\Debug\net8.0\Microsoft.Extensions.Localization.Abstractions.dll
 C:\Users\matth\source\repos\StarWarsAPI\StarWarsAPI\bin\Debug\net8.0\Microsoft.JSInterop.dll
 C:\Users\matth\source\repos\StarWarsAPI\StarWarsAPI\bin\Debug\net8.0\MudBlazor.dll
+C:\Users\matth\source\repos\StarWarsAPI\StarWarsAPI\obj\Debug\net8.0\StarWarsAPI.sourcelink.json
+C:\Users\matth\source\repos\StarWarsAPI\StarWarsAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

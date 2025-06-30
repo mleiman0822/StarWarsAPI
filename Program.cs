@@ -5,6 +5,7 @@ using MudBlazor.Services;
 using StarWarsAPI.Components;
 using StarWarsAPI.Components.Account;
 using StarWarsAPI.Data;
+using StarWarsAPI.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,8 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
 
 builder.Services.AddMudServices();
 builder.Services.AddHttpClient();
+builder.Services.AddScoped<StarshipService>();
+builder.Services.AddScoped<SwapiSeeder>();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
@@ -63,5 +66,11 @@ app.MapRazorComponents<App>()
 
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
+
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<SwapiSeeder>();
+    await seeder.SeedAsync();
+}
 
 app.Run();
