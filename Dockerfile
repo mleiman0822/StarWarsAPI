@@ -2,24 +2,24 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copy csproj and restore dependencies
+# Copy project file(s) and restore dependencies
 COPY ["StarWarsAPI.csproj", "./"]
-RUN dotnet restore "StarWarsAPI.csproj"
+RUN dotnet restore
 
 # Copy the rest of the source code
 COPY . .
 
 # Publish the app in Release mode
-RUN dotnet publish "StarWarsAPI.csproj" -c Release -o /app/publish --no-restore
+RUN dotnet publish "StarWarsAPI.csproj" -c Release -o /app/publish
 
-# Stage 2: Runtime image
+# Stage 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
-# Copy published app from build stage
+# Copy the published output from build stage
 COPY --from=build /app/publish .
 
-# Expose port 80 (default HTTP port)
+# Expose port 80 for HTTP traffic
 EXPOSE 80
 
 # Start the app
