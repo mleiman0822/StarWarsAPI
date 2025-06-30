@@ -52,13 +52,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\StarWarsAPI.2uqny22nh3.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"2uqny22nh3"},{"Name":"integrity","Value":"sha256-mnFANbJXLsdoUZa7HQq\u002BDFEPTUUeYBCkmwo\u002B2l0snL0="},{"Name":"label","Value":"_content/StarWarsAPI/StarWarsAPI.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"8193"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022mnFANbJXLsdoUZa7HQq\u002BDFEPTUUeYBCkmwo\u002B2l0snL0=\u0022"},{"Name":"Last-Modified","Value":"Mon, 30 Jun 2025 18:55:59 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"8193"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022mnFANbJXLsdoUZa7HQq\u002BDFEPTUUeYBCkmwo\u002B2l0snL0=\u0022"},{"Name":"Last-Modified","Value":"Mon, 30 Jun 2025 20:43:16 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/StarWarsAPI/StarWarsAPI.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\StarWarsAPI.2uqny22nh3.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-mnFANbJXLsdoUZa7HQq\u002BDFEPTUUeYBCkmwo\u002B2l0snL0="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"8193"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022mnFANbJXLsdoUZa7HQq\u002BDFEPTUUeYBCkmwo\u002B2l0snL0=\u0022"},{"Name":"Last-Modified","Value":"Mon, 30 Jun 2025 18:55:59 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"8193"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022mnFANbJXLsdoUZa7HQq\u002BDFEPTUUeYBCkmwo\u002B2l0snL0=\u0022"},{"Name":"Last-Modified","Value":"Mon, 30 Jun 2025 20:43:16 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
   </ItemGroup>
 </Project>
