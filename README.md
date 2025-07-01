@@ -126,7 +126,7 @@ Prerequisites
 
     .NET 8 SDK or later installed.
 
-    SQL Server or other configured database.
+    Postgres(used for compatibility with render.com)
 
     Visual Studio 2022 or VS Code.
 
